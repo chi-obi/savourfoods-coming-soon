@@ -1,0 +1,5 @@
+Fix: remove stray 'xs' text breaking CSS parser
+
+- Deleted invalid 'xs' string after header span rule
+- Resolves .hero section not centering (margin: 0 auto wasn't
+  being applied due to broken CSS parsing after the typo)
