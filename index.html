@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savour Foods | Coming Soon</title>
+<style>
+  :root {
+    --brand-red: #C0001A;
+    --brand-black: #1A1A1A;
+    --brand-white: #FFFFFF;
+    --brand-grey: #F1EFE8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--brand-grey);
+    color: var(--brand-black);
+    line-height: 1.5;
+  }
+  header {
+  background: var(--brand-black);
+  padding: 24px;
+  text-align: center;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.logo {
+  height: 36px;
+  width: auto;
+}
+header h1 {
+  color: var(--brand-white);
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+header span { color: var(--brand-red); }xs
+  .hero {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 48px 24px 24px;
+    text-align: center;
+  }
+  .hero h2 {
+    font-size: 32px;
+    margin-bottom: 12px;
+    color: var(--brand-black);
+  }
+  .hero p {
+    font-size: 17px;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--brand-red);
+    color: var(--brand-white);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-top: 16px;
+    letter-spacing: 0.5px;
+  }
+  .form-wrap {
+    max-width: 480px;
+    margin: 32px auto;
+    background: var(--brand-white);
+    border: 1px solid var(--brand-red);
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    padding: 32px;
+  }
+  .tabs {
+    display: flex;
+    margin-bottom: 24px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #eee;
+  }
+  .tab {
+    flex: 1;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    background: #f5f5f5;
+    font-weight: 600;
+    font-size: 14px;
+    transition: 0.2s;
+  }
+  .tab.active {
+    background: var(--brand-red);
+    color: var(--brand-white);
+  }
+  .form-group { margin-bottom: 16px; }
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--brand-black);
+  }
+  input, select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--brand-red);
+  }
+  button[type="submit"] {
+    width: 100%;
+    padding: 13px;
+    background: var(--brand-red);
+    color: var(--brand-white);
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: 0.2s;
+  }
+  button[type="submit"]:hover { background: var(--brand-black); }
+  .hidden { display: none; }
+  #statusMsg {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+    color: #999;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="assets /logo.png" alt="Savour Foods logo" class="logo">
+    <h1>Savour<span>Foods</span></h1>
+  </div>
+</header>
+
+<section class="hero">
+  <h2>Great catering, made simple.</h2>
+  <p>Savour Foods connects you with vetted caterers across Lagos and Abuja — 
+  browse, book, and pay securely in a few taps. Whether you're planning a small 
+  gathering or a full event, we handle the matchmaking.</p>
+  <span class="badge">🚀 Launching Soon</span>
+</section>
+
+<div class="form-wrap">
+  <div class="tabs">
+    <div class="tab active" data-target="foodie">I'm a Foodie</div>
+    <div class="tab" data-target="caterer">I'm a Caterer</div>
+  </div>
+
+  <form id="signupForm">
+    <input type="hidden" id="userType" name="userType" value="foodie">
+
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number (optional)</label>
+      <input type="tel" id="phone" name="phone">
+    </div>
+
+    <div class="form-group">
+      <label for="city">City</label>
+      <select id="city" name="city" required>
+        <option value="Lagos">Lagos</option>
+        <option value="Abuja">Abuja</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <!-- Caterer-only field -->
+    <div class="form-group hidden" id="businessNameGroup">
+      <label for="businessName">Business / Catering Name</label>
+      <input type="text" id="businessName" name="businessName">
+    </div>
+
+    <button type="submit">Notify Me at Launch</button>
+    <div id="statusMsg"></div>
+  </form>
+</div>
+
+<footer>&copy; 2026 Savour Foods </footer>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const userTypeInput = document.getElementById('userType');
+  const businessNameGroup = document.getElementById('businessNameGroup');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const target = tab.dataset.target;
+      userTypeInput.value = target;
+      businessNameGroup.classList.toggle('hidden', target !== 'caterer');
+      document.getElementById('businessName').required = (target === 'caterer');
+    });
+  });
+
+  // Replace with your Google Apps Script Web App URL (see setup steps)
+  const SCRIPT_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+  document.getElementById('signupForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const statusMsg = document.getElementById('statusMsg');
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    data.timestamp = new Date().toISOString();
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(() => {
+      statusMsg.style.color = '#1A1A1A';
+      statusMsg.textContent = "You're on the list! We'll be in touch before launch.";
+      e.target.reset();
+      submitBtn.textContent = "Notify Me at Launch";
+      submitBtn.disabled = false;
+    })
+    .catch(() => {
+      statusMsg.style.color = '#C0001A';
+      statusMsg.textContent = "Something went wrong — please try again.";
+      submitBtn.textContent = "Notify Me at Launch";
+      submitBtn.disabled = false;
+    });
+  });
+</script>
+
+</body>
+</html>
