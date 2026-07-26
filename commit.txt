@@ -1,6 +1,4 @@
-Add confirmation email via Resend
+Personalize confirmation email sender and add support contact
 
-- Sends branded welcome email after successful signup
-- Different copy for foodie vs caterer
-- Email failures are logged but don't block the signup response
-- Includes support email in the footer section 
+- From address now displays as 'Adaeze from Savour Foods'
+- Added unmonitored mailbox notice with support@savourfoodsco.com as alternate contact
