@@ -224,40 +224,41 @@ header span { color: var(--brand-red); }
     });
   });
 
-  // Replace with your Google Apps Script Web App URL (see setup steps)
-  const SCRIPT_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
-
+  // Airtable form call
   document.getElementById('signupForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const statusMsg = document.getElementById('statusMsg');
-    const submitBtn = e.target.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Submitting...";
+  e.preventDefault();
+  const statusMsg = document.getElementById('statusMsg');
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Submitting...";
 
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-    data.timestamp = new Date().toISOString();
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData.entries());
 
-    fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-    .then(() => {
+  fetch('/api/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(result => {
+    if (result.status === 'success') {
       statusMsg.style.color = '#1A1A1A';
       statusMsg.textContent = "You're on the list! We'll be in touch before launch.";
       e.target.reset();
-      submitBtn.textContent = "Notify Me at Launch";
-      submitBtn.disabled = false;
-    })
-    .catch(() => {
-      statusMsg.style.color = '#C0001A';
-      statusMsg.textContent = "Something went wrong — please try again.";
-      submitBtn.textContent = "Notify Me at Launch";
-      submitBtn.disabled = false;
-    });
+    } else {
+      throw new Error(result.error || 'Unknown error');
+    }
+    submitBtn.textContent = "Notify Me at Launch";
+    submitBtn.disabled = false;
+  })
+  .catch(() => {
+    statusMsg.style.color = '#C0001A';
+    statusMsg.textContent = "Something went wrong — please try again.";
+    submitBtn.textContent = "Notify Me at Launch";
+    submitBtn.disabled = false;
   });
+});
 </script>
 
 </body>

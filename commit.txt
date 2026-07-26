@@ -1,5 +1,5 @@
-Fix: remove stray 'xs' text breaking CSS parser
+Add Airtable integration via Vercel serverless function
 
-- Deleted invalid 'xs' string after header span rule
-- Resolves .hero section not centering (margin: 0 auto wasn't
-  being applied due to broken CSS parsing after the typo)
+- New api/submit.js proxies form submissions to Airtable
+- Keeps API token server-side via environment variables
+- Updated form JS to call /api/submit instead of Apps Script
