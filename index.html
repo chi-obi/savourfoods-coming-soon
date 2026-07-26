@@ -246,6 +246,11 @@ header span { color: var(--brand-red); }
        statusMsg.style.color = '#1A1A1A';
        statusMsg.textContent = "You're on the list! We'll be in touch before launch.";
        e.target.reset();
+
+       if (window.va) {
+         window.va('event', { name: 'signup_completed', data: { userType: data.userType } });
+       }
+       
      } else if (status === 409) {
        statusMsg.style.color = '#C0001A';
        statusMsg.textContent = result.message;
@@ -263,6 +268,8 @@ header span { color: var(--brand-red); }
    });
 });
 </script>
+
+<script defer src="/_vercel/insights/script.js"></script>
 
 </body>
 </html>

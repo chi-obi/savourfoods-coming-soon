@@ -1,5 +1,4 @@
-Add duplicate email check to signup flow
+Add Vercel Analytics tracking
 
-- api/submit.js now checks Airtable for existing email before insert
-- Returns 409 with friendly message on duplicate
-- Frontend distinguishes duplicate vs generic error states
+- Added Vercel Insights script tag
+- Added custom signup_completed event with userType on successful submission
