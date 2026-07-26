@@ -64,7 +64,10 @@ export default async function handler(req, res) {
 
     const htmlBody = isCaterer
       ? `<div style="font-family: sans-serif; color: #1A1A1A;">
-          <h2 style="color: #C0001A;">Welcome to Savour Foods, ${name}!</h2>
+          <h2 style="margin: 0;">
+            <span style="color: #C0001A;">Welcome to Savour Foods,</span>
+            <span style="color: #1A1A1A;">${name}!</span>
+          </h2>
           <p>Thanks for signing up as a caterer. We're building a platform to connect 
           you with clients across Nigeria, and we'll be reaching out with 
           onboarding details before our launch.</p>
@@ -74,7 +77,10 @@ export default async function handler(req, res) {
           <p>— Adaeze, Savour Foods</p>
         </div>`
       : `<div style="font-family: sans-serif; color: #1A1A1A;">
-          <h2 style="color: #C0001A;">Welcome to Savour Foods, ${name}!</h2>
+          <h2 style="margin: 0;">
+            <span style="color: #C0001A;">Welcome to Savour Foods,</span>
+            <span style="color: #1A1A1A;">${name}!</span>
+          </h2>
           <p>Thanks for joining the waitlist. We're launching soon in Lagos and Abuja, 
           and you'll be among the first to know when the app is live.</p>
           <p style="font-size: 13px; color: #555;">This mailbox is unmonitored — for 

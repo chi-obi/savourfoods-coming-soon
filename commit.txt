@@ -1,4 +1,4 @@
-Personalize confirmation email sender and add support contact
+Adjust confirmation email heading color
 
-- From address now displays as 'Adaeze from Savour Foods'
-- Added unmonitored mailbox notice with support@savourfoodsco.com as alternate contact
+- Split h2 into two spans: 'Welcome to Savour Foods,' stays red,
+  '[Name]!' now black for a less intense first impression
