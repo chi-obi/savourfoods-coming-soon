@@ -1,5 +1,5 @@
-Add Airtable integration via Vercel serverless function
+Add duplicate email check to signup flow
 
-- New api/submit.js proxies form submissions to Airtable
-- Keeps API token server-side via environment variables
-- Updated form JS to call /api/submit instead of Apps Script
+- api/submit.js now checks Airtable for existing email before insert
+- Returns 409 with friendly message on duplicate
+- Frontend distinguishes duplicate vs generic error states

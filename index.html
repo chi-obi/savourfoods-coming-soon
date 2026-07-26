@@ -236,28 +236,31 @@ header span { color: var(--brand-red); }
   const data = Object.fromEntries(formData.entries());
 
   fetch('/api/submit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+   method: 'POST',
+   headers: { 'Content-Type': 'application/json' },
+   body: JSON.stringify(data)
   })
-  .then(res => res.json())
-  .then(result => {
-    if (result.status === 'success') {
-      statusMsg.style.color = '#1A1A1A';
-      statusMsg.textContent = "You're on the list! We'll be in touch before launch.";
-      e.target.reset();
-    } else {
-      throw new Error(result.error || 'Unknown error');
-    }
-    submitBtn.textContent = "Notify Me at Launch";
-    submitBtn.disabled = false;
-  })
-  .catch(() => {
-    statusMsg.style.color = '#C0001A';
-    statusMsg.textContent = "Something went wrong — please try again.";
-    submitBtn.textContent = "Notify Me at Launch";
-    submitBtn.disabled = false;
-  });
+   .then(res => res.json().then(result => ({ status: res.status, result })))
+   .then(({ status, result }) => {
+     if (status === 200) {
+       statusMsg.style.color = '#1A1A1A';
+       statusMsg.textContent = "You're on the list! We'll be in touch before launch.";
+       e.target.reset();
+     } else if (status === 409) {
+       statusMsg.style.color = '#C0001A';
+       statusMsg.textContent = result.message;
+     } else {
+       throw new Error(result.error || 'Unknown error');
+     }
+     submitBtn.textContent = "Notify Me at Launch";
+     submitBtn.disabled = false;
+   })
+   .catch(() => {
+     statusMsg.style.color = '#C0001A';
+     statusMsg.textContent = "Something went wrong — please try again.";
+     submitBtn.textContent = "Notify Me at Launch";
+     submitBtn.disabled = false;
+   });
 });
 </script>
 
