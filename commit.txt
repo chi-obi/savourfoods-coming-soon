@@ -1,4 +1,6 @@
-Add Vercel Analytics tracking
+Add confirmation email via Resend
 
-- Added Vercel Insights script tag
-- Added custom signup_completed event with userType on successful submission
+- Sends branded welcome email after successful signup
+- Different copy for foodie vs caterer
+- Email failures are logged but don't block the signup response
+- Includes support email in the footer section 

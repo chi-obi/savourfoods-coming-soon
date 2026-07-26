@@ -56,6 +56,48 @@ export default async function handler(req, res) {
       return res.status(502).json({ error: 'Failed to save signup' });
     }
 
+    // Step 3: Send confirmation email via Resend
+    const isCaterer = userType === 'caterer';
+    const subject = isCaterer
+      ? "You're on the Savour Foods caterer waitlist!"
+      : "You're on the Savour Foods waitlist!";
+
+    const htmlBody = isCaterer
+      ? `<div style="font-family: sans-serif; color: #1A1A1A;">
+          <h2 style="color: #C0001A;">Welcome to Savour Foods, ${name}!</h2>
+          <p>Thanks for signing up as a caterer. We're building a platform to connect 
+          you with clients across Lagos and Abuja, and we'll be reaching out with 
+          onboarding details before our August launch.</p>
+          <p>In the meantime, feel free to reply to this email with any questions.</p>
+          <p>— The Savour Foods Team</p>
+        </div>`
+      : `<div style="font-family: sans-serif; color: #1A1A1A;">
+          <h2 style="color: #C0001A;">Welcome to Savour Foods, ${name}!</h2>
+          <p>Thanks for joining the waitlist. We're launching soon in Lagos and Abuja, 
+          and you'll be among the first to know when the app is live.</p>
+          <p>— The Savour Foods Team</p>
+        </div>`;
+
+    try {
+      await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: 'Savour Foods <hello@savourfoodsco.com>',
+          to: email,
+          subject: subject,
+          html: htmlBody,
+        }),
+      });
+    } catch (emailErr) {
+      // Don't fail the whole request if only the email send fails —
+      // the signup itself already succeeded in Airtable.
+      console.error('Resend email error:', emailErr);
+    }
+
     return res.status(200).json({ status: 'success' });
   } catch (err) {
     console.error('Server error:', err);
