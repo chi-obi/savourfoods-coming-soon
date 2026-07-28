@@ -1,4 +1,3 @@
-Adjust confirmation email heading color
+Fix email address in footer section
 
-- Split h2 into two spans: 'Welcome to Savour Foods,' stays red,
-  '[Name]!' now black for a less intense first impression
+- Corrected contact email displayed in page footer
